@@ -1,0 +1,14 @@
+---
+ - hosts: all
+   remote_user: ansible
+   gather_facts: no
+   become: yes  # All tasks that follow will become root
+
+   tasks:
+   - name: Set recipient for root emails
+     lineinfile:
+           dest: /etc/aliases
+           regexp: '^root:'
+           line: "root:           andreas@dvorak.xyz"
+           state: present
+           backup: yes
